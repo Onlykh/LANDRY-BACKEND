@@ -323,16 +323,22 @@ echo "<?php
         }
 
         /**
-        * Update the specified resource in storage.
+         * Update the specified resource in storage.
         *
         * @return JsonResponse
         */
-        public function update(${ModelName}UpdateRequest \$request, ${ModelName} \$${lowerModel}): JsonResponse
+        public function update(${ModelName}UpdateRequest, int \$id): JsonResponse
         {
-            \$this->${lowerModel}Service->update( \$${lowerModel}, \$request->validated());
+            \$${lowerModel} = \$this->${lowerModel}Service->findById(\$id);
+            if (!\$${lowerModel}) {
+                return response()->json(['message' => '${ModelName} not found'], 404);
+            }
+
+            \$${lowerModel} = \$this->${lowerModel}Service->update(\$${lowerModel}, \$request->validated());
+
             return response()->json([
                 'message' => __('actions.success'),
-                'data' => new ${ModelName}Resource (\$${lowerModel})
+                'data' => new ${ModelName}Resource(\$${lowerModel})
             ], 200);
         }
 
@@ -341,13 +347,16 @@ echo "<?php
         *
         * @return JsonResponse
         */
-        public function destroy(${ModelName} \$${lowerModel}, Request \$request): JsonResponse
+        public function destroy(int \$id): JsonResponse
         {
-            Gate::authorize('delete', \$${lowerModel});
+            \$${lowerModel} = \$this->${lowerModel}Service->findById(\$id);
+            if (!\$${lowerModel}) {
+                return response()->json(['message' => '${ModelName} not found'], 404);
+            }
 
             \$this->${lowerModel}Service->delete(\$${lowerModel});
 
-            return response()->json([ 'message' => __('actions.success')],202);
+            return response()->json(['message' => __('actions.success')], 204); 
         }
     }" > "app/Http/Controllers/${ModelName}Controller.php"
 
