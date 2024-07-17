@@ -114,23 +114,23 @@ EOL
 
         public function all(\$filters = [])
         {
-            \$orderedModel = \$this->testCountry->filter(\$filters);
+            \$${lowerModel} = \$this->${lowerModel}->filter(\$filters);
 
             if (isset(\$filters['select'])) {
-                \$orderedModel->select(\$filters['select']);
+                \$${lowerModel}->select(\$filters['select']);
             }
 
             if (isset(\$filters['order_by'])) {
-                \$orderedModel->orderBy(\$filters['order_by'], \$filters['order'] ?? 'asc');
+                \$${lowerModel}->orderBy(\$filters['order_by'], \$filters['order'] ?? 'asc');
             }
 
             if (isset(\$filters['with'])) {
-                \$orderedModel->with(\$filters['with']);
+                \$${lowerModel}->with(\$filters['with']);
             }
 
             return \$filters['paginated'] ?? false
-                ? \$orderedModel->paginate(\$filters['page_size'] ?? 10)
-                : \$orderedModel->get();
+                ? \$${lowerModel}->paginate(\$filters['page_size'] ?? 10)
+                : \$${lowerModel}->get();
         }
 
         public function findById(\$id, \$with)
@@ -143,9 +143,10 @@ EOL
             return \$this->${lowerModel}->create(\$data);
         }
 
-        public function update(${ModelName} \$${lowerModel}, array \$data)
+        public function update(${ModelName} \$${lowerModel}, array \$data) 
         {
-            return \$this->${lowerModel}->update(\$data);
+            \$${lowerModel}->update(\$data);
+            return \$${lowerModel};
         }
 
         public function delete(${ModelName} \$${lowerModel})
