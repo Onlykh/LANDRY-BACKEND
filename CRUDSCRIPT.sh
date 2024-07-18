@@ -13,7 +13,7 @@ pluralize() {
     fi
 }
 
-echo "Enter model names separated by space (DTestModel):"
+echo "Enter model names separated by space (DTest):"
 read -a models
 
 for model in "${models[@]}"; do
@@ -143,7 +143,7 @@ EOL
             return \$this->${lowerModel}->create(\$data);
         }
 
-        public function update(${ModelName} \$${lowerModel}, array \$data) 
+        public function update(${ModelName} \$${lowerModel}, array \$data)
         {
             \$${lowerModel}->update(\$data);
             return \$${lowerModel};
@@ -327,7 +327,7 @@ echo "<?php
         *
         * @return JsonResponse
         */
-        public function update(${ModelName}UpdateRequest, int \$id): JsonResponse
+        public function update(${ModelName}UpdateRequest \$request, int \$id): JsonResponse
         {
             \$${lowerModel} = \$this->${lowerModel}Service->findById(\$id);
             if (!\$${lowerModel}) {
@@ -356,7 +356,7 @@ echo "<?php
 
             \$this->${lowerModel}Service->delete(\$${lowerModel});
 
-            return response()->json(['message' => __('actions.success')], 204); 
+            return response()->json(['message' => __('actions.success')], 204);
         }
     }" > "app/Http/Controllers/${ModelName}Controller.php"
 
@@ -460,5 +460,5 @@ EOL
 
 
 done
-    composer dump-autoload
+    # composer dump-autoload
     php artisan ide-helper:models
