@@ -461,4 +461,4 @@ EOL
 
 done
     # composer dump-autoload
-    php artisan ide-helper:models
+    # php artisan ide-helper:models
