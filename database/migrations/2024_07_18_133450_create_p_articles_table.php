@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->unsignedInteger('category');
             $table->foreign('category')->references('category')->on('p_categories');
-            $table->unsignedInteger('unit');
+            $table->string('unit');
             $table->foreign('unit')->references('unit')->on('p_units');
             $table->string('color')->nullable();
             $table->string('icon')->nullable();

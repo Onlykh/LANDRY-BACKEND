@@ -6,10 +6,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'd_users';
 
     /**
      * The attributes that are mass assignable.
@@ -17,9 +25,18 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'phone_number',
         'email',
+        'email_verified_at',
+        'phone_verified_at',
         'password',
+        'identifier',
+        'avatar',
+        'address',
+        'code',
+        'otp_attempts'
     ];
 
     /**
@@ -30,6 +47,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'code',
     ];
 
     /**
@@ -43,5 +61,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function hasVerifiedPhoneNumber(): bool
+    {
+        return $this->phone_verified_at !== null;
     }
 }
