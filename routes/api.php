@@ -12,13 +12,22 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ServiceController;
-
+use App\Http\Controllers\UserController;
 
 ############################### AUTH ###############################
 Route::post('/auth/verify', [AuthController::class, 'verifyUser']);
 Route::post('/auth/login', [AuthController::class, 'login']);
 Route::post('/auth/logout', [AuthController::class, 'logout']);
 
+
+############################### users ###############################
+Route::prefix('users')->group(function () {
+    Route::post('/', [UserController::class, 'store']);
+    Route::get('/', [UserController::class, 'index']);
+    Route::get('/{id}', [UserController::class, 'show']);
+    Route::put('/{id}', [UserController::class, 'update']);
+    Route::delete('/{id}', [UserController::class, 'destroy']);
+});
 
 ############################### service ###############################
 Route::prefix('services')->group(function () {
@@ -52,14 +61,7 @@ Route::prefix('order-headers')->group(function () {
     Route::put('/{id}', [OrderHeaderController::class, 'update']);
     Route::delete('/{id}', [OrderHeaderController::class, 'destroy']);
 });
-############################### order line ###############################
-Route::prefix('order-lines')->group(function () {
-    Route::post('/', [OrderLineController::class, 'store']);
-    Route::get('/', [OrderLineController::class, 'index']);
-    Route::get('/{id}', [OrderLineController::class, 'show']);
-    Route::put('/{id}', [OrderLineController::class, 'update']);
-    Route::delete('/{id}', [OrderLineController::class, 'destroy']);
-});
+
 ############################### unit ###############################
 Route::prefix('units')->group(function () {
     Route::post('/', [UnitController::class, 'store']);
@@ -77,11 +79,6 @@ Route::prefix('preferences')->group(function () {
     Route::delete('/{id}', [PreferenceController::class, 'destroy']);
 });
 
-Route::get('/test', function () {
-    $smsGatewayService = new SmsGatewayService();
-    $smsGatewayService->sendOtp('95627977', 123456);
-    return response()->json(['message' => 'Welcome to the API']);
-});
 ############################### slider ###############################
 Route::prefix('sliders')->group(function () {
     Route::post('/', [SliderController::class, 'store']);
