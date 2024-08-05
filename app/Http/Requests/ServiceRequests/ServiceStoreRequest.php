@@ -11,7 +11,7 @@ class ServiceStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,14 @@ class ServiceStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'reference' => ['required', 'string', 'unique:p_services,reference'],
+            'entitled' => ['required', 'string'],
+            'description' => ['required', 'string'],
+            'type' => ['required', 'integer'],
+            'state' => ['required', 'integer'],
+            'color' => ['required', 'string'],
+            'icon' => ['required', 'string'],
+
         ];
     }
 }

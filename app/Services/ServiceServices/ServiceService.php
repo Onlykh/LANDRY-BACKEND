@@ -23,6 +23,11 @@ class ServiceService implements ServiceServiceInterface
         return $this->serviceRepository->findById($id, $with);
     }
 
+    public function findByReference($reference, $with = [])
+    {
+        return $this->serviceRepository->findByReference($reference, $with);
+    }
+
     public function create(array $data)
     {
         return $this->serviceRepository->create($data);

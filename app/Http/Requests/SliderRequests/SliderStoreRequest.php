@@ -11,7 +11,7 @@ class SliderStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class SliderStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'entitled' => ['nullable', 'string'],
+            'description' => ['nullable', 'string'],
+            'image' => ['required', 'string'],
+            'link' => ['nullable', 'string', 'url'],
+            'position' => ['required', 'string'],
         ];
     }
 }
