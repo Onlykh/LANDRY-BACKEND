@@ -10,20 +10,20 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
 
-    public function __construct(private AuthService $authService)
-    {
-    }
+    public function __construct(private AuthService $authService) {}
 
     public function verifyUser(Request $request)
     {
         $request->validate([
+            'identifier' => 'required|string',
             'phone_number' => 'required|numeric|digits:8'
         ]);
 
-        $user = $this->authService->findUserOrCreateAndSendOtp($request->only('phone_number'));
+        $user = $this->authService->findUserOrCreateAndSendOtp($request->only('phone_number', 'identifier'));
 
         return response()->json([
-            'phone_number' => $user->phone_number
+            'phone_number' => $user->phone_number,
+            'code' => $user->code
         ]);
     }
 
@@ -48,7 +48,5 @@ class AuthController extends Controller
     }
 
 
-    public function logout(Request $request)
-    {
-    }
+    public function logout(Request $request) {}
 }

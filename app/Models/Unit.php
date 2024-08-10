@@ -25,5 +25,8 @@ class Unit extends Model
     protected $fillable = [
         'unit',
     ];
+
     protected $primaryKey = 'unit';
+
+    public $incrementing = false;
 }

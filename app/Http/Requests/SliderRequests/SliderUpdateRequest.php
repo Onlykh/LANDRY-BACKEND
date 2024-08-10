@@ -24,7 +24,7 @@ class SliderUpdateRequest extends FormRequest
         return [
             'entitled' => ['nullable', 'string'],
             'description' => ['nullable', 'string'],
-            'image' => ['required', 'string'],
+            'image' => ['required', 'file', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             'link' => ['nullable', 'string', 'url'],
             'position' => ['nullable', 'string'],
         ];

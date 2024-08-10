@@ -30,4 +30,9 @@ class Slider extends Model
         'is_active',
         'position',
     ];
+
+    public function getImageAttribute($value)
+    {
+        return asset("storage/$value");
+    }
 }

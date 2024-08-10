@@ -32,4 +32,10 @@ class Service extends Model
         'icon',
     ];
     protected $primaryKey = 'reference';
+
+
+    public function getIconAttribute($value)
+    {
+        return asset("storage/$value");
+    }
 }

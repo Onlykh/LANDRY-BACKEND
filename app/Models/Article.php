@@ -33,4 +33,14 @@ class Article extends Model
         'image',
     ];
     protected $primaryKey = 'reference';
+
+    public function getIconAttribute($value)
+    {
+        return asset("storage/$value");
+    }
+
+    public function getImageAttribute($value)
+    {
+        return asset("storage/$value");
+    }
 }

@@ -28,8 +28,8 @@ class ArticleUpdateRequest extends FormRequest
             'category' => ['required', 'integer', 'exists:p_categories,category'],
             'unit' => ['required', 'string', 'exists:p_units,unit'],
             'color' => ['nullable', 'string'],
-            'icon' => ['nullable', 'string'],
-            'image' => ['nullable', 'string'],
+            'icon' => ['nullable', 'file', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
+            'image' => ['nullable', 'file', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ];
     }
 }

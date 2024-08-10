@@ -28,7 +28,7 @@ class ServiceStoreRequest extends FormRequest
             'type' => ['required', 'integer'],
             'state' => ['required', 'integer'],
             'color' => ['required', 'string'],
-            'icon' => ['required', 'string'],
+            'icon' => ['required', 'file', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
 
         ];
     }

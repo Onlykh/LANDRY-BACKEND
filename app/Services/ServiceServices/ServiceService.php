@@ -9,9 +9,7 @@ use App\Models\Service;
 class ServiceService implements ServiceServiceInterface
 {
 
-    public function __construct(private ServiceRepository $serviceRepository)
-    {
-    }
+    public function __construct(private ServiceRepository $serviceRepository) {}
 
     public function all($filters = [])
     {
@@ -30,7 +28,15 @@ class ServiceService implements ServiceServiceInterface
 
     public function create(array $data)
     {
-        return $this->serviceRepository->create($data);
+        try {
+            $file = $data['icon'];
+            $filePath = uploadFile($file, 'services');
+            $data['icon'] = $filePath;
+            $service = $this->serviceRepository->create($data);
+            return $service;
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     public function update(Service $service, array $data)

@@ -25,7 +25,7 @@ class CategoryUpdateRequest extends FormRequest
             // 'category' => ['required', 'integer', 'unique:p_categories,category'],
             'entitled' => ['required', 'string'],
             'description' => ['required', 'string'],
-            'icon' => ['required', 'string'],
+            'icon' => ['required', 'file', 'image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
         ];
     }
 }

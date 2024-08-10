@@ -30,4 +30,9 @@ class Category extends Model
     ];
 
     protected $primaryKey = 'category';
+
+    public function getIconAttribute($value)
+    {
+        return asset("storage/$value");
+    }
 }

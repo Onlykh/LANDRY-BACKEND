@@ -15,9 +15,7 @@ use Illuminate\Support\Facades\Gate;
 class CategoryController extends Controller
 {
 
-    public function __construct(private CategoryService $categoryService)
-    {
-    }
+    public function __construct(private CategoryService $categoryService) {}
 
     /**
      * Display a listing of the resource.
@@ -44,7 +42,6 @@ class CategoryController extends Controller
     {
         $category = $this->categoryService
             ->create($request->validated());
-        dd($category->category);
 
         return response()->json(
             [

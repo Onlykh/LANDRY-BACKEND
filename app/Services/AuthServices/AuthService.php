@@ -16,9 +16,7 @@ class AuthService implements AuthServiceInterface
     const SECOND_INCREMENT_SECONDS = 1800; // 30 minutes
     const THIRD_INCREMENT_SECONDS = 86400; // 24 hours
 
-    public function __construct(private UserService $userService)
-    {
-    }
+    public function __construct(private UserService $userService) {}
 
     public function findUserOrCreateAndSendOtp(array $credentials): User
     {
@@ -101,6 +99,7 @@ class AuthService implements AuthServiceInterface
 
     static function calculateDecayTime($attempts)
     {
+        return 10;
         if ($attempts < 3) {
             return self::INITIAL_DECAY_SECONDS;
         }
