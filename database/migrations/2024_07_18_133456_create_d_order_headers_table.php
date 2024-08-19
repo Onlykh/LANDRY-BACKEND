@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\OrderStateEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -14,8 +15,11 @@ return new class extends Migration
         Schema::create('d_order_headers', function (Blueprint $table) {
             $table->id();
             $table->string('reference')->unique();
-            $table->tinyInteger('state')->default(0);
-            $table->foreignId('client_id')->constrained();
+            $table->string('state')->default(OrderStateEnum::IN_PROGRESS());
+            $table->foreignId('client_id')->constrained(
+                'd_users',
+                'id'
+            );
             $table->string('ref_service');
             $table->foreign('ref_service')->references('reference')->on('p_services');
             $table->unsignedBigInteger('phone_number');

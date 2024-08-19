@@ -1,13 +1,15 @@
 <?php
 
-    namespace App\Repositories\OrderHeaderRepositories;
+namespace App\Repositories\OrderHeaderRepositories;
 
-    use App\Models\OrderHeader;
+use App\Models\OrderHeader;
 
-    interface OrderHeaderRepositoryInterface {
-        public function all($filters = []);
-        public function findById($id, $with);
-        public function create(array $data);
-        public function update(OrderHeader $orderHeader, array $data);
-        public function delete(OrderHeader $orderHeader);
-    }
+interface OrderHeaderRepositoryInterface
+{
+    public function all($filters = []);
+    public function findById($id, $with);
+    public function create(array $data);
+    public function update(OrderHeader $orderHeader, array $data);
+    public function delete(OrderHeader $orderHeader);
+    public function createOrderLines(OrderHeader $orderHeader, array $data);
+}

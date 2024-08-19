@@ -22,7 +22,29 @@ class OrderHeaderStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'ref_service' => ['required', 'string', 'exists:p_services,reference'],
+            'phone_number' => ['required', 'numeric'],
+            'pick_up_date' => ['required', 'date'],
+            'delivery_date' => ['required', 'date'],
+
+            'pick_up_address' => ['required', 'array'],
+            'delivery_address' => ['required', 'array'],
+
+            'total_ht' => ['required', 'numeric'],
+            'total_tva' => ['required', 'numeric'],
+            'total_ttc' => ['required', 'numeric'],
+            'total_discount' => ['required', 'numeric'],
+            'delivery_cost' => ['required', 'numeric'],
+            'net_to_pay' => ['required', 'numeric'],
+
+            'note' => ['nullable', 'string'],
+
+            'order_lines' => ['required', 'array'],
+            'order_lines.*.ref_article' => ['required', 'string', 'exists:p_articles,reference'],
+            'order_lines.*.qte' => ['required', 'numeric'],
+            'order_lines.*.unit_price_ht' => ['required', 'numeric'],
+            'order_lines.*.amount_ht' => ['required', 'numeric'],
+            'order_lines.*.note' => ['nullable', 'string'],
         ];
     }
 }
