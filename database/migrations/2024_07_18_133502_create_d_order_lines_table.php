@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('d_order_lines', function (Blueprint $table) {
             $table->id();
+            $table->string('label');
+            $table->foreignId('d_order_header_id')->constrained();
+
+            $table->string('ref_article');
+            $table->foreign('ref_article')->references('reference')->on('p_articles');
+
+            $table->decimal('qte', 24, 6);
+            $table->decimal('unit_price_ht', 24, 6);
+            $table->decimal('amount_ht', 24, 6);
+
+            $table->text('note')->nullable();
+
             $table->timestamps();
         });
     }
